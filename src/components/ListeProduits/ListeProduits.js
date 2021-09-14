@@ -31,9 +31,12 @@ export default class ListeProduits extends React.Component{
                 <Produit info={item} onClick={this.cliquer.bind(item)} key={index}/>
             );
         })
+
+        let sLogin = (this.props.login ? "oui" : "non");
         console.log(produits);
         return (
             <section>
+                <p>Suis-je connecté ? {sLogin} </p>
                 <section><p>Nombre d'item(s) : {this.state.items.length}</p></section>
                 <section className="listeProduit">
                     {produits}

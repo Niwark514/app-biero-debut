@@ -8,8 +8,14 @@ export default class Entete extends React.Component {
     console.log(this.props.titre);
     //this.props.titre = "Titre par défaut";  // Lecture seule
     //this.compte = 10;
-    this.state = {compte:10}; // Le state contient les données du composant.
+    this.state = {compte:10,
+                  //courriel : "",
+                  //login : false
+                }; // Le state contient les données du composant.
+
     this.boutonCliquer = this.boutonCliquer.bind(this);
+    //this.changeCourriel = this.changeCourriel.bind(this)
+    //this.login = this.login.bind(this);
   }
 
   boutonCliquer(){
@@ -25,15 +31,38 @@ export default class Entete extends React.Component {
       this.setState((state)=>({compte:state.compte+1}))
   }
 
+  /*login(){
+    this.setState((state, props)=> {
+            let bLogin = false;
+            if(state.courriel){ // Si le courriel est non vide (non sécuritaire)!
+                bLogin = true;
+            }
+            return {login : bLogin};
+          }
+      );
+  }*/
+
+  /*changeCourriel(evt){
+    this.setState({courriel:evt.target.value});
+  }*/
+
   render() {
     // Il peut y avoir du code ici...
     const titre = this.props.titre || "titre par défaut";
-    
+    const login = (this.state.login ? "connecté" : "non connecté"); 
+
     return (  
+      
             <div>
                 <h1 className="test">{titre}</h1>
                 <h1 className="test">{this.props.titre || "titre par défaut"}</h1>
                 <button onClick={this.boutonCliquer}>Cliquez ici ({this.state.compte})</button>
+                
+                
+                <input onChange={this.props.changeCourriel} type="text" /><button onClick={this.props.login}>Login</button>
+                <p>{this.state.courriel}</p>
+                <p>{login}</p>
+
                 <nav>
                     <ul>
                         <li><BoutonNav lien="#1" label="Item 1"/></li>

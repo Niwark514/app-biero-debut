@@ -7,10 +7,18 @@ export default class Produit extends React.Component{
        
     }
 
-   
-
     render(){
-        const prix = (this.props.info.prix ? <p>Prix : {this.props.info.prix}</p> : "");
+        //const prix = (this.props.info.prix ? <p>Prix : {this.props.info.prix}</p> : "");
+            //(condition ? si vrai : si faux)
+        
+        let prix = "";
+        if(this.props.info.prix){
+            prix = <p>Prix : {this.props.info.prix}</p>;
+        }
+        else{
+            prix = <p>Produit non vendu</p>;
+        }
+        
 
         return (
             <article className="produit">
