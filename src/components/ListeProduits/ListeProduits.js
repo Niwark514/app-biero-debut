@@ -1,4 +1,5 @@
 import React from "react";
+import Produit from "../Produit/Produit";
 import "./ListeProduits.css";
 
 export default class ListeProduits extends React.Component{
@@ -26,14 +27,17 @@ export default class ListeProduits extends React.Component{
     render(){
         const produits = this.state.items.map((item, index)=>{
             return (
-                <article onClick={this.cliquer.bind(item)} key={index}>{item.nom}</article>
+                //<article onClick={this.cliquer.bind(item)} key={index}>{item.nom}</article>
+                <Produit info={item} onClick={this.cliquer.bind(item)} key={index}/>
             );
         })
         console.log(produits);
         return (
             <section>
-                <p>Nombre d'item(s) : {this.state.items.length}</p>
-                {produits}
+                <section><p>Nombre d'item(s) : {this.state.items.length}</p></section>
+                <section className="listeProduit">
+                    {produits}
+                </section>
             </section>
         );
     }
