@@ -10,11 +10,13 @@ export default class Produit extends React.Component{
    
 
     render(){
+        const prix = (this.props.info.prix ? <p>Prix : {this.props.info.prix}</p> : "");
+
         return (
             <article className="produit">
                 <p>Nom : {this.props.info.nom}</p>
                 <p>Fabricant : {this.props.info.brasserie}</p>
-                <p>Prix : {this.props.info.prix}</p>
+                {prix}
             </article>
         );
     }
