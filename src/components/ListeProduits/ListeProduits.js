@@ -6,6 +6,12 @@ export default class ListeProduits extends React.Component{
         super(props);
     }
 
+    componentDidMount(){
+        fetch("http://127.0.0.1:8000/webservice/php/biere")
+            .then(reponse => reponse.json())
+            .then((donnees)=>{console.log(donnees)});
+    }
+
     render(){
         return (
             <section>
