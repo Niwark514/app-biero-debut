@@ -1,5 +1,5 @@
 import React from "react";
-import "./ListeProduit.css";
+import "./ListeProduits.css";
 
 export default class ListeProduits extends React.Component{
     constructor(props){
@@ -14,6 +14,5 @@ export default class ListeProduits extends React.Component{
                 <article>3</article>
             </section>
         );
-
     }
 }
