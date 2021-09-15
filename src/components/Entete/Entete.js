@@ -42,7 +42,10 @@ export default class Entete extends React.Component {
         }
 		this.setState({login:bLogin});
 		
-    	this.props.login(bLogin);
+		if(this.props.login){
+			this.props.login(bLogin);
+		}
+    
 	}
 
   changeCourriel(evt){
