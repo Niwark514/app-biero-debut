@@ -25,19 +25,32 @@ export default class ListeProduits extends React.Component{
     }
 
     render(){
-        const produits = this.state.items.map((item, index)=>{
-            return (
-                //<article onClick={this.cliquer.bind(item)} key={index}>{item.nom}</article>
-                <Produit info={item} onClick={this.cliquer.bind(item)} key={index}/>
-            );
-        })
+        const produits = this.state.items
+                            .filter(item => {
+                                let bValide = false;
+                                if(this.props.id_produit === "tous"){
+                                    bValide = true;
+                                }else if(this.props.id_produit === "pair" && item.id_biere %2 === 0){
+                                    bValide = true;
+                                }else if(this.props.id_produit === "impair" && item.id_biere %2 !== 0){
+                                    bValide = true;
+                                }
+                                return bValide;
+                            })
+                            .map((item, index)=>{
+                                return (
+                                    //<article onClick={this.cliquer.bind(item)} key={index}>{item.nom}</article>
+                                    
+                                    <Produit info={item} onClick={this.cliquer.bind(item)} key={index}/>
+                                );
+                            })
 
         let sLogin = (this.props.login ? "oui" : "non");
         console.log(produits);
         return (
             <section>
                 <p>Suis-je connecté ? {sLogin} </p>
-                <section><p>Nombre d'item(s) : {this.state.items.length}</p></section>
+                <section><p>Nombre d'item(s) : {produits.length} Filtre : {this.props.id_produit}</p></section>
                 <section className="listeProduit">
                     {produits}
                 </section>

@@ -22,7 +22,7 @@ export default class Produit extends React.Component{
 
         return (
             <article className="produit">
-                <p>Nom : {this.props.info.nom}</p>
+                <p>Nom : {this.props.info.nom} ({this.props.info.id_biere})</p>
                 <p>Fabricant : {this.props.info.brasserie}</p>
                 {prix}
             </article>
