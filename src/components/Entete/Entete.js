@@ -14,8 +14,8 @@ export default class Entete extends React.Component {
                 }; // Le state contient les données du composant.
 
     this.boutonCliquer = this.boutonCliquer.bind(this);
-    //this.changeCourriel = this.changeCourriel.bind(this)
-    //this.login = this.login.bind(this);
+    this.changeCourriel = this.changeCourriel.bind(this)
+    this.login = this.login.bind(this);
   }
 
   boutonCliquer(){
@@ -30,26 +30,31 @@ export default class Entete extends React.Component {
                     });*/
       this.setState((state)=>({compte:state.compte+1}))
   }
+	
+	login(){
+		let bLogin = false;
+		if(this.state.login && this.state.courriel){
+			bLogin =false;
+			this.setState({courriel:""});
+		}
+		else if(!this.state.login && this.state.courriel){ // Si le courriel est non vide (non sécuritaire)!
+        	bLogin = true;
+        }
+		this.setState({login:bLogin});
+		
+    	this.props.login(bLogin);
+	}
 
-  /*login(){
-    this.setState((state, props)=> {
-            let bLogin = false;
-            if(state.courriel){ // Si le courriel est non vide (non sécuritaire)!
-                bLogin = true;
-            }
-            return {login : bLogin};
-          }
-      );
-  }*/
-
-  /*changeCourriel(evt){
+  changeCourriel(evt){
     this.setState({courriel:evt.target.value});
-  }*/
+  }
 
   render() {
     // Il peut y avoir du code ici...
     const titre = this.props.titre || "titre par défaut";
     const login = (this.state.login ? "connecté" : "non connecté"); 
+	
+	let btnLogin = <button onClick={this.login}>{(this.state.login ? "Se déconnecter" : "Se connecter")}</button>;
 
     return (  
       
@@ -59,7 +64,8 @@ export default class Entete extends React.Component {
                 <button onClick={this.boutonCliquer}>Cliquez ici ({this.state.compte})</button>
                 
                 
-                <input onChange={this.props.changeCourriel} type="text" /><button onClick={this.props.login}>Login</button>
+                <input value={this.state.courriel} disabled={this.state.login ? 'disable' : ''} onChange={this.changeCourriel} type="text" />
+				{btnLogin}
                 <p>{this.state.courriel}</p>
                 <p>{login}</p>
 
