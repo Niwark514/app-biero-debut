@@ -7,7 +7,7 @@ import {Route, Switch, BrowserRouter as Router} from 'react-router-dom';
 
 import './App.css';
 import Accueil from '../Accueil/Accueil';
-import Contact from '../Contact/Contact';
+import DetailProduit from '../DetailProduit/DetailProduit';
 
 export default class App extends React.Component{
 	constructor(props){
@@ -43,11 +43,13 @@ export default class App extends React.Component{
 			<Router>
 				<Entete titre="page accueil"/>
 				<Switch>
-					<Route exact path="/">
-						<Accueil />
+					<Route exact path="/" component={Accueil} />
+						
+					
+					<Route exact path="/produit" >	
+						<ListeProduits login={this.state.login} filtre="tous"/>
 					</Route>
-					<Route exact path="/produit" component={ListeProduits} />	
-					<Route exact path= "/produit/:id" render={()=><Contact />}/>
+					<Route exact path= "/produit/:id" render={(param_route)=><DetailProduit {...param_route} id={param_route?.match?.params?.id} param={param_route} />}/>
 					<Route exact path="*" render={()=><p>Page non trouvée</p>} />
 				</Switch>
 			</Router>

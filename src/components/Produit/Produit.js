@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./Produit.css";
 
 export default class Produit extends React.Component{
@@ -21,12 +22,14 @@ export default class Produit extends React.Component{
         
 
         return (
-            <article className="produit">
-                <p>Nom : {this.props.info.nom} ({this.props.info.id_biere})</p>
-                <p>Fabricant : {this.props.info.brasserie}</p>
-                {prix}
-                <p>Note : {this.props.info.note_moyenne}</p>
-            </article>
+            <Link to={"/produit/"+this.props.info.id_biere}>
+                <article className="produit">
+                    <p>Nom : {this.props.info.nom} ({this.props.info.id_biere})</p>
+                    <p>Fabricant : {this.props.info.brasserie}</p>
+                    {prix}
+                    <p>Note : {this.props.info.note_moyenne}</p>
+                </article>
+            </Link>
         );
     }
 }
