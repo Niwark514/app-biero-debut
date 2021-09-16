@@ -2,7 +2,7 @@ import React from 'react';
 
 import './Contact.css';
 
-class Contact extends React.Component {
+export default class Contact extends React.Component {
     constructor(props) {
         super(props);
     }
@@ -16,4 +16,3 @@ class Contact extends React.Component {
     }
 }
 
-export default Contact;

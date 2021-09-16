@@ -2,7 +2,7 @@ import React from 'react';
 
 import './Accueil.css';
 
-class Accueil extends React.Component {
+export default class Accueil extends React.Component {
     constructor(props) {
         super(props);
     }
@@ -15,5 +15,3 @@ class Accueil extends React.Component {
         );
     }
 }
-
-export default Accueil;
