@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link, NavLink } from 'react-router-dom';
 import BoutonNav from '../BoutonNav/BoutonNav';
 import './Entete.css';
 
@@ -61,7 +62,14 @@ export default class Entete extends React.Component {
 
 		return (  
 				<div>
-					<h1 className="test">{titre}</h1>
+					
+					<Link to="/">Accueil</Link>
+					<NavLink activeClassName="page_active" to="/">Accueil</NavLink>
+					<Link to="/produit">Produit</Link>
+					<NavLink to="/produit">Produit</NavLink>
+					<Link to="/contact">Contact</Link>
+					<NavLink to="/contact">Contact</NavLink>
+
 					<h1 className="test">{this.props.titre || "titre par défaut"}</h1>
 					<button onClick={this.boutonCliquer}>Cliquez ici ({this.state.compte})</button>
 					

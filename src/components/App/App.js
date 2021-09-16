@@ -41,13 +41,15 @@ export default class App extends React.Component{
 		</main>*/
 		return (  // JSX
 			<Router>
-				<Route path="/">
-					<Accueil />
-				</Route>
-				<Route path="/contact" component={Contact} />
-
-				<Route path= "/information" render={()=><h1>Information</h1>}/>
-
+				<Entete titre="page accueil"/>
+				<Switch>
+					<Route exact path="/">
+						<Accueil />
+					</Route>
+					<Route exact path="/produit" component={ListeProduits} />	
+					<Route exact path= "/produit/:id" render={()=><Contact />}/>
+					<Route exact path="*" render={()=><p>Page non trouvée</p>} />
+				</Switch>
 			</Router>
 		
 		);
