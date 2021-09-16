@@ -25,6 +25,7 @@ export default class Produit extends React.Component{
                 <p>Nom : {this.props.info.nom} ({this.props.info.id_biere})</p>
                 <p>Fabricant : {this.props.info.brasserie}</p>
                 {prix}
+                <p>Note : {this.props.info.note_moyenne}</p>
             </article>
         );
     }

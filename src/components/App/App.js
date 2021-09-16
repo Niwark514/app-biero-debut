@@ -30,9 +30,9 @@ export default class App extends React.Component{
 		return (  // JSX
 		<main>
 			<Entete titre="Site React" login={this.login} />
-			<ListeProduits login={this.state.login} id_produit="pair"/>
-			<ListeProduits login={this.state.login} id_produit="impair"/>
-			<ListeProduits login={this.state.login} id_produit="tous"/>
+			<ListeProduits login={this.state.login} filtre="pair" />
+			<ListeProduits login={this.state.login} filtre="impair"/>
+			<ListeProduits login={this.state.login} filtre="tous" note_min="2" note_max="3.5"/>
 		</main>
 		);
 	}

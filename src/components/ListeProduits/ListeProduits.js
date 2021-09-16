@@ -28,11 +28,23 @@ export default class ListeProduits extends React.Component{
         const produits = this.state.items
                             .filter(item => {
                                 let bValide = false;
-                                if(this.props.id_produit === "tous"){
+                                if(this.props.filtre === "tous"){
                                     bValide = true;
-                                }else if(this.props.id_produit === "pair" && item.id_biere %2 === 0){
+                                }else if(this.props.filtre === "pair" && item.id_biere %2 === 0){
                                     bValide = true;
-                                }else if(this.props.id_produit === "impair" && item.id_biere %2 !== 0){
+                                }else if(this.props.filtre === "impair" && item.id_biere %2 !== 0){
+                                    bValide = true;
+                                }
+                                return bValide;
+                            })
+                            .filter(item => {
+                                let bValide = false;
+                                if(this.props.note_min &&  this.props.note_max){
+                                    if(parseFloat(this.props.note_min) <= parseFloat(item.note_moyenne) && parseFloat(this.props.note_max) >= parseFloat(item.note_moyenne) ){
+                                        bValide = true;
+                                    }
+                                }
+                                else{
                                     bValide = true;
                                 }
                                 return bValide;

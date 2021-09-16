@@ -48,38 +48,36 @@ export default class Entete extends React.Component {
     
 	}
 
-  changeCourriel(evt){
-    this.setState({courriel:evt.target.value});
-  }
+	changeCourriel(evt){
+		this.setState({courriel:evt.target.value});
+	}
 
-  render() {
-    // Il peut y avoir du code ici...
-    const titre = this.props.titre || "titre par défaut";
-    const login = (this.state.login ? "connecté" : "non connecté"); 
-	
-	let btnLogin = <button onClick={this.login}>{(this.state.login ? "Se déconnecter" : "Se connecter")}</button>;
+  	render() {
+		// Il peut y avoir du code ici...
+		const titre = this.props.titre || "titre par défaut";
+		const login = (this.state.login ? "connecté" : "non connecté"); 
+		
+		let btnLogin = <button onClick={this.login}>{(this.state.login ? "Se déconnecter" : "Se connecter")}</button>;
 
-    return (  
-      
-            <div>
-                <h1 className="test">{titre}</h1>
-                <h1 className="test">{this.props.titre || "titre par défaut"}</h1>
-                <button onClick={this.boutonCliquer}>Cliquez ici ({this.state.compte})</button>
-                
-                
-                <input value={this.state.courriel} disabled={this.state.login ? 'disable' : ''} onChange={this.changeCourriel} type="text" />
-				{btnLogin}
-                <p>{this.state.courriel}</p>
-                <p>{login}</p>
+		return (  
+				<div>
+					<h1 className="test">{titre}</h1>
+					<h1 className="test">{this.props.titre || "titre par défaut"}</h1>
+					<button onClick={this.boutonCliquer}>Cliquez ici ({this.state.compte})</button>
+					
+					<input value={this.state.courriel} disabled={this.state.login ? 'disable' : ''} onChange={this.changeCourriel} type="text" />
+					{btnLogin}
+					<p>{this.state.courriel}</p>
+					<p>{login}</p>
 
-                <nav>
-                    <ul>
-                        <li><BoutonNav lien="#1" label="Item 1"/></li>
-                        <li><BoutonNav lien="#2" label={this.props.titre}/></li>
-                        <li><BoutonNav lien="#2" label="Item 100"/></li>
-                    </ul>
-                </nav>
-            </div>
-        );
-  }
+					<nav>
+						<ul>
+							<li><BoutonNav lien="#1" label="Item 1"/></li>
+							<li><BoutonNav lien="#2" label={this.props.titre}/></li>
+							<li><BoutonNav lien="#2" label="Item 100"/></li>
+						</ul>
+					</nav>
+				</div>
+			);
+	}
 }
