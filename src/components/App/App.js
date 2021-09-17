@@ -5,7 +5,6 @@ import ListeProduits from '../ListeProduits/ListeProduits';
 
 import {Route, Switch, BrowserRouter as Router} from 'react-router-dom';
 
-import './App.css';
 import Accueil from '../Accueil/Accueil';
 import DetailProduit from '../DetailProduit/DetailProduit';
 
