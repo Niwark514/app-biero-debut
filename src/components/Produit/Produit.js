@@ -19,12 +19,16 @@ export default class Produit extends React.Component{
         else{
             prix = <p>Produit non vendu</p>;
         }
-        
+
+        // !!! attention vérifier si le fichier image existe sinon afficher une image par défaut
+        //const imgProduit = (this.props.info.id_biere ? this.props.info.id_biere : "204x204.jpg");
 
         return (
             <Link to={"/produit/"+this.props.info.id_biere}>
                 <article className='unProduit init'>
-                    <div className='image'><img src="204x204.png" /></div>
+                    <div className='image'>
+                        <img src={"imgProduits/" + this.props.info.id_biere + ".jpg"} />
+                    </div>
                     <div className='texte'>
                         <p className='nom'>Nom : {this.props.info.nom} ({this.props.info.id_biere})</p>
                         <p>Fabricant : {this.props.info.brasserie}</p>

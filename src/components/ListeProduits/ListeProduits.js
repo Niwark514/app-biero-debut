@@ -11,8 +11,9 @@ export default class ListeProduits extends React.Component{
     }
 
     componentDidMount(){
+        console.log("Mount liste")
         fetch("http://127.0.0.1:8000/webservice/php/biere")
-            .then(reponse => reponse.json())
+            .then(response => response.json())
             .then((donnees)=>{
                 this.setState({items:donnees.data}) 
                 console.log(donnees)

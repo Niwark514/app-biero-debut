@@ -1,4 +1,11 @@
 .listeProduit{
+    margin: 2rem;
     display: flex;
     flex-wrap: wrap;
+    gap: 2rem;
 }
+
+.unProduit {
+    padding: 1rem;
+}
+
