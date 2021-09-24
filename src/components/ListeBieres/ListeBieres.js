@@ -1,12 +1,13 @@
 import React from "react";
-import Produit from "../Produit/Produit";
-import "./ListeProduits.css";
+import Biere from "../Biere/Biere";
+import "./ListeBieres.css";
 
-export default class ListeProduits extends React.Component{
+export default class ListeBieres extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            items :[]
+            items :[],
+            login :[],
         }
     }
 
@@ -26,8 +27,10 @@ export default class ListeProduits extends React.Component{
     }
 
     render(){
-        const produits = this.state.items
-                            .filter(item => {
+        console.log(this.state)
+        console.log(this.props)
+        const bieres = this.state.items
+                            /* .filter(item => {
                                 let bValide = false;
                                 if(this.props.filtre === "tous"){
                                     bValide = true;
@@ -37,7 +40,7 @@ export default class ListeProduits extends React.Component{
                                     bValide = true;
                                 }
                                 return bValide;
-                            })
+                            }) */
                             .filter(item => {
                                 let bValide = false;
                                 if(this.props.note_min &&  this.props.note_max){
@@ -54,18 +57,17 @@ export default class ListeProduits extends React.Component{
                                 return (
                                     //<article onClick={this.cliquer.bind(item)} key={index}>{item.nom}</article>
                                     
-                                    <Produit info={item} onClick={this.cliquer.bind(item)} key={index}/>
+                                    <Biere info={item} onClick={this.cliquer.bind(item)} key={index}/>
                                 );
                             })
 
         let sLogin = (this.props.login ? "oui" : "non");
-        console.log(produits);
         return (
             <section>
                 <p>Suis-je connecté ? {sLogin} </p>
-                <section><p>Nombre d'item(s) : {produits.length} Filtre : {this.props.id_produit}</p></section>
-                <section className="listeProduit">
-                    {produits}
+                <section><p>Nombre d'item(s) : {bieres.length} Filtre : {this.props.id_biere}</p></section>
+                <section className="listeBiere">
+                    {bieres}
                 </section>
             </section>
         );

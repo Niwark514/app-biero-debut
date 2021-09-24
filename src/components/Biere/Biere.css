@@ -1,22 +1,22 @@
-.unProduit {
+.uneBiere {
     position: relative;
     padding: 5px 5px 5px 5px;
     text-align: center;
 }
-.unProduit .image {
+.uneBiere .image {
     position: relative;
     max-width: 20vw;
     top: 0px;
     left: 0px;
     opacity: 0.5;
 }
-.unProduit .texte {
+.uneBiere .texte {
     position: absolute;
     top: 25%;
     display: flex;
     flex-direction: column;
     font-size: 1.2em;
 }
-.unProduit .texte .nom, .unProduit .texte .brasserie {
+.uneBiere .texte .nom, .uneBiere .texte .brasserie {
     display: block;
 }

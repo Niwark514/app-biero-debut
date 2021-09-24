@@ -1,0 +1,56 @@
+.biere_wrapper{
+    color:lightslategrey;
+    
+}
+
+.uneBiere {
+    background-color: #fff;
+}
+
+.image {
+    opacity: 1;
+}
+
+.ref {
+    font-size: small;
+    font-weight: bold;
+    padding-right: 2rem;
+    text-align: end;
+}
+.nom {
+font-weight: bold;
+}
+.fabricant {
+    font-style: oblique;
+}
+
+.note {
+    padding-right: 2rem;
+    text-align: end;
+}
+
+.commentaires {
+    row-gap: 0.5rem;
+    background-color: rgb(201, 198, 190);
+    color: navy;
+}
+
+.unCommentaire {
+padding: 1rem;
+}
+
+.formCommentaire{
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+}
+.radioNote_wrapper {
+display: flex;
+justify-content: center;
+gap: 0.5rem;
+}
+.radioNote {
+    display: flex;
+    flex-direction: column;
+}

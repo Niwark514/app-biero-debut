@@ -13,7 +13,7 @@ export default class Accueil extends React.Component {
 			<div className="pageAccueil">
 				<div className="contenu">
 					<div className="bandeau">
-						<Link to="/produit" className="btnAction">Notre sélection de produit</Link>
+						<Link to="/biere" className="btnAction">Notre sélection de bières</Link>
 					</div>
 					<div className="arguments">
 						<div>Argument 1 : 

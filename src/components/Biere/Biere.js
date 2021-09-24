@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./Produit.css";
+import "./Biere.css";
 
-export default class Produit extends React.Component{
+export default class Biere extends React.Component{
     constructor(props){
         super(props);
        
@@ -17,17 +17,17 @@ export default class Produit extends React.Component{
             prix = <p>Prix : {this.props.info.prix}</p>;
         }
         else{
-            prix = <p>Produit non vendu</p>;
+            prix = <p>Biere non vendu</p>;
         }
 
         // !!! attention vérifier si le fichier image existe sinon afficher une image par défaut
-        //const imgProduit = (this.props.info.id_biere ? this.props.info.id_biere : "204x204.jpg");
+        //const imgBiere = (this.props.info.id_biere ? this.props.info.id_biere : "204x204.jpg");
 
         return (
-            <Link to={"/produit/"+this.props.info.id_biere}>
-                <article className='unProduit init'>
+            <Link to={"/biere/"+this.props.info.id_biere}>
+                <article className='uneBiere init'>
                     <div className='image'>
-                        <img src={"imgProduits/" + this.props.info.id_biere + ".jpg"} />
+                        <img src={"imgBieres/" + this.props.info.id_biere + ".jpg"} />
                     </div>
                     <div className='texte'>
                         <p className='nom'>Nom : {this.props.info.nom} ({this.props.info.id_biere})</p>
