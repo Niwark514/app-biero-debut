@@ -88,7 +88,6 @@ export default class DetailBiere extends React.Component {
     }
 
     putUnCommentaire() {
-        //console.log(this.state.newCommentValue)
         const { id } = this.props?.param?.match?.params;
         const entete = new Headers();
         entete.append("Content-Type", "application/json");
@@ -110,7 +109,7 @@ export default class DetailBiere extends React.Component {
 
     async setNewNoteValue(event) {
         await this.setState({ newNote: event.target.value });
-        //this.putNote();
+        this.putNote();
     }
 
     putNote() {
@@ -126,10 +125,9 @@ export default class DetailBiere extends React.Component {
                 "note": this.state.newNote,
             })
         };
-        fetch("http://127.0.0.1:8000/webservice/php/biere/" + id + "/commentaire", requestOptions)
+        fetch("http://127.0.0.1:8000/webservice/php/biere/" + id + "/note", requestOptions)
             .then(response => response.json())
             .then(data => this.setState({ newNoteId: data.id }));
-        console.log(this.state.newNoteId)
     }
 
     
@@ -137,8 +135,6 @@ export default class DetailBiere extends React.Component {
     render() {
         const detailBiere = this.state.detailBiere;
         const noteBiere = this.state.note
-        
-
         const commentaires = this.state.commentaires
             .map((commentaire, index) => {
                 return (
@@ -149,9 +145,7 @@ export default class DetailBiere extends React.Component {
 
                 );
             })
-        
 
-        
         return (
             <div className='biere_wrapper'>
                 <h1>DetailBiere</h1>
