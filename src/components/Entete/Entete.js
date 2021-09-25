@@ -8,32 +8,23 @@ import App from '../App/App';
 export default class Entete extends React.Component {
   constructor(props){
     super(props);
-    console.log(this.props);
-    //this.props.titre = "Titre par défaut";  // Lecture seule
-    
+
     this.state = {
                   courriel : "",
                   login : false
-                }; // Le state contient les données du composant.
-
-
-    //this.changeCourriel = this.props.changeCourriel.bind(this)
+                };
     this.login = this.login.bind(this);
   }
 
 	login(){
 		let bLogin = false;
-		if(this.state.login && this.props.courriel){
+		if(this.state.login && this.state.courriel){
 			bLogin =false;
-			console.log("login false")
-			this.setState(this.props.changeCourriel);
-			console.log(this.props.courriel)
-			
+			this.setState({courriel:""});
+
 		}
 		else if(!this.state.login && this.props.courriel){ // Si le courriel est non vide (non sécuritaire)!
         	bLogin = true;
-			console.log("login true")
-			console.log(this.props.courriel)
         }
 		this.setState({login:bLogin});
 		if(this.props.login){
@@ -42,9 +33,9 @@ export default class Entete extends React.Component {
 	}
 
   	render() {
-		// Il peut y avoir du code ici...
+		
 		const titre = this.props.titre || "titre par défaut";
-		const login = (this.state.login ? "connecté" : "non connecté"); 
+		const login = (this.state.login ? "connecté" : "non connecté");
 		let btnLogin = <button onClick={this.login}>{(this.state.login ? "Se déconnecter" : "Se connecter")}</button>;
 
 		return (

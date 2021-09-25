@@ -17,7 +17,7 @@ export default class DetailBiere extends React.Component {
             newCommentId: [],
 
         };
-       
+
         this.setNewcommentValue = this.setNewcommentValue.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.setNewNoteValue = this.setNewNoteValue.bind(this);
@@ -31,11 +31,11 @@ export default class DetailBiere extends React.Component {
     componentDidMount() {
         console.log("Mount detail")
         const { id } = this.props?.param?.match?.params;
-        //Details biere
+        // Details biere
         this.getUneBiere();
         // Note et nombre de notes
         this.getNote();
-        // commentaires et courriels
+        // Commentaires et courriels
         this.getCommentaires();
     }
 
@@ -76,7 +76,7 @@ export default class DetailBiere extends React.Component {
 
     //Puts
 
-        //Nouveau Commentaire
+    //Nouveau Commentaire
 
     async setNewcommentValue(event) {
         await this.setState({ newCommentValue: event.target.value });
@@ -105,7 +105,7 @@ export default class DetailBiere extends React.Component {
             .then(data => this.setState({ newCommentId: data.id }));
     }
 
-        //Nouvelle Note
+    //Nouvelle Note
 
     async setNewNoteValue(event) {
         await this.setState({ newNote: event.target.value });
@@ -130,7 +130,7 @@ export default class DetailBiere extends React.Component {
             .then(data => this.setState({ newNoteId: data.id }));
     }
 
-    
+
 
     render() {
         const detailBiere = this.state.detailBiere;
@@ -146,6 +146,53 @@ export default class DetailBiere extends React.Component {
                 );
             })
 
+        console.log(this.props)
+
+        let isLoginShowFormNote = "";
+        let isLoginShowFormCommentaire = "";
+        let isNotLoginMessage = "";
+        if (this.props.login) {
+            isLoginShowFormNote = <div onChange={this.setNewNoteValue} className='radioNote_wrapper'>
+                <p className='description'>Noter cette bière :</p>
+                <div className="radioNote">
+                    <input type="radio" id="note-0" name="newNote" value="0"></input>
+                    <label for="note-0">0</label>
+                </div>
+                <div className="radioNote">
+                    <input type="radio" id="note-1" name="newNote" value="1"></input>
+                    <label for="note-1">1</label>
+                </div>
+                <div className="radioNote">
+                    <input type="radio" id="note-2" name="newNote" value="2"></input>
+                    <label for="note-2">2</label>
+                </div>
+                <div className="radioNote">
+                    <input type="radio" id="note-3" name="newNote" value="3"></input>
+                    <label for="note-3">3</label>
+                </div>
+                <div className="radioNote">
+                    <input type="radio" id="note-4" name="newNote" value="4"></input>
+                    <label for="note-4">4</label>
+                </div>
+                <div className="radioNote">
+                    <input type="radio" id="note-5" name="newNote" value="5"></input>
+                    <label for="note-5">5</label>
+                </div>
+            </div>;
+            isLoginShowFormCommentaire =
+                <div>
+                    <h3>Nouveau commentaire</h3>
+                    <form onSubmit={this.handleSubmit} className='formCommentaire'>
+                        <textarea placeholder="Votre commentaire" rows="10" maxLength="250" value={this.state.newCommentValue} onChange={this.setNewcommentValue}></textarea>
+                        <input type="submit" value="Envoyer"></input>
+                    </form>
+                </div>;
+        }
+        else {
+            isNotLoginMessage = <p>Se connecter pour entrer une note ou un commentaire</p>;
+        }
+
+
         return (
             <div className='biere_wrapper'>
                 <h1>DetailBiere</h1>
@@ -158,49 +205,21 @@ export default class DetailBiere extends React.Component {
                         <p className='ref'>Ref : {detailBiere.id_biere}</p>
                         <p className='fabricant'>Fabricant : {detailBiere.brasserie}</p>
                         <p className='description'>Description : {detailBiere.description}</p>
-                        
+                        {isNotLoginMessage}
+
                     </section>
                     <section>
-                        <h3>Note</h3>
-                        <p className='note'>Note actuelle moyenne : {noteBiere.note} ({noteBiere.nombre})</p>
+                        <h4 className='note'>Note actuelle moyenne : {noteBiere.note} ({noteBiere.nombre})</h4>
+                        {isLoginShowFormNote}
 
-                        <div onChange={this.setNewNoteValue} className='radioNote_wrapper'>
-                            <p className='description'>Noter cette bière :</p>
-                            <div className="radioNote">
-                                <input type="radio" id="note-0" name="newNote" value="0"></input>
-                                <label for="note-0">0</label>
-                            </div>
-                            <div className="radioNote">
-                                <input type="radio" id="note-1" name="newNote" value="1"></input>
-                                <label for="note-1">1</label>
-                            </div>
-                            <div className="radioNote">
-                                <input type="radio" id="note-2" name="newNote" value="2"></input>
-                                <label for="note-2">2</label>
-                            </div>
-                            <div className="radioNote">
-                                <input type="radio" id="note-3" name="newNote" value="3"></input>
-                                <label for="note-3">3</label>
-                            </div>
-                            <div className="radioNote">
-                                <input type="radio" id="note-4" name="newNote" value="4"></input>
-                                <label for="note-4">4</label>
-                            </div>
-                            <div className="radioNote">
-                                <input type="radio" id="note-5" name="newNote" value="5"></input>
-                                <label for="note-5">5</label>
-                            </div>
-                        </div>
                     </section>
                 </article>
                 <section className="commentaires">
                     <h2>Commentaires</h2>
                     {commentaires}
-                    <h3>Nouveau commentaire</h3>
-                    <form onSubmit={this.handleSubmit} className='formCommentaire'>
-                        <textarea placeholder="Votre commentaire" rows="10" maxLength="250" value={this.state.newCommentValue} onChange={this.setNewcommentValue}></textarea>
-                        <input type="submit" value="Envoyer"></input>
-                    </form>
+
+                    {isLoginShowFormCommentaire}
+
                 </section>
             </div>
         );
