@@ -1,3 +1,13 @@
 .active{
     font-weight: bold;
 }
+.errorMessage {
+    font-size: 0.75rem;
+    color: rgb(138, 21, 21);
+    font-weight: bold;
+    margin-right: 1rem;
+}
+
+.imgLogo{
+    height: 100%;
+}

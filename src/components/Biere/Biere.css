@@ -1,6 +1,5 @@
 .uneBiere {
     position: relative;
-    padding: 5px 5px 5px 5px;
     text-align: center;
 }
 .uneBiere .image {
@@ -8,7 +7,7 @@
     max-width: 20vw;
     top: 0px;
     left: 0px;
-    opacity: 0.5;
+    opacity: 0.55;
 }
 .uneBiere .texte {
     position: absolute;
@@ -16,7 +15,33 @@
     display: flex;
     flex-direction: column;
     font-size: 1.2em;
+    color:rgb(255, 255, 255);
+    background-color: rgb(18, 18, 36);
+    opacity: 0.75;
+    width: 100%;
+    padding: 0.5rem 0;
+
 }
+ .uneBiere.image img {
+     
+ }
 .uneBiere .texte .nom, .uneBiere .texte .brasserie {
     display: block;
+}
+
+@media screen and (max-width: 768px){
+    .uneBiere .texte {
+        position:unset;
+        display: flex;
+        flex-direction: column;
+        font-size: 1.2em;
+        
+    }
+    .uneBiere .image {
+        position: relative;
+        max-width: 150px;
+        top: 0px;
+        left: 0px;
+        opacity: 0.5;
+    }
 }

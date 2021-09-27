@@ -38,7 +38,9 @@ export default class App extends React.Component{
 				<Entete  login={this.login} courriel={this.state.courriel} changeCourriel={this.changeCourriel} onChange={this.changeCourriel} titre="page accueil"/>
 				<Switch>
 					<Route exact path="/" component={Accueil} />
-					<Route exact path="/biere">
+						
+					
+					<Route exact path="/biere" >	
 						<ListeBieres login={this.state.login}/>
 					</Route>
 					<Route exact path= "/biere/:id" render={(param_route)=><DetailBiere login={this.state.login} courriel={this.state.courriel} {...param_route} id={param_route?.match?.params?.id} param={param_route} />}/>

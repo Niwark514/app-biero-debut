@@ -3,6 +3,7 @@ import { Link, NavLink } from 'react-router-dom';
 import BoutonNav from '../BoutonNav/BoutonNav';
 import './Entete.css';
 import App from '../App/App';
+import logo from '../../bieroLogo.svg';
 
 
 export default class Entete extends React.Component {
@@ -11,20 +12,30 @@ export default class Entete extends React.Component {
 
     this.state = {
                   courriel : "",
-                  login : false
+                  login : false,
+				  errorMessage :"",
                 };
     this.login = this.login.bind(this);
+	this.courrielIsValid=this.courrielIsValid.bind(this);
   }
 
 	login(){
 		let bLogin = false;
-		if(this.state.login && this.state.courriel){
+		console.log(this.props)
+		if(this.state.login && this.props.courriel){//si j'ai déja un courriel dans props et que login est vrai dans state (je suis déja connecté)
 			bLogin =false;
 			this.setState({courriel:""});
 
 		}
 		else if(!this.state.login && this.props.courriel){ // Si le courriel est non vide (non sécuritaire)!
-        	bLogin = true;
+			let estValide = this.courrielIsValid(this.props.courriel);
+			console.log(this.state.errorMessage)
+			if (estValide) {
+				bLogin = true;
+				this.setState({errorMessage :""})
+			}else{
+				this.setState({errorMessage :"La forme du courriel n'est pas valide"})
+			}
         }
 		this.setState({login:bLogin});
 		if(this.props.login){
@@ -32,6 +43,19 @@ export default class Entete extends React.Component {
 		}
 	}
 
+courrielIsValid(courriel){
+
+const courrielRegex = /^[a-zA-Z]+@[a-zA-Z]/
+		if(courrielRegex. test(courriel)){
+		return true;
+		}else{
+		return false;
+		}
+
+}
+
+
+	
   	render() {
 		
 		const titre = this.props.titre || "titre par défaut";
@@ -44,7 +68,9 @@ export default class Entete extends React.Component {
 					<div className="top-nav">
 						<div className="barre">
 							<Link className="logo" to="/">
-								B<span>iero</span>
+
+									<img className="imgLogo" src={logo} alt="Logo Biero"/>
+
 							</Link>
 							<span className="flex-spacer"></span>
 							<p className="menu-mobile"></p>
@@ -54,8 +80,8 @@ export default class Entete extends React.Component {
 							<li>
 								<NavLink activeClassName="active" to="/biere">Les bières</NavLink>
 							</li>
-							<li>
-							<input name="courriel" value={this.props.courriel} disabled={this.state.login ? 'disable' : ''} onChange={this.props.changeCourriel} type="text" />
+							<li><span className="errorMessage">{this.state.errorMessage}</span>
+							<input name="courriel" value={!this.courrielIsValid? this.errorMessage : this.props.courriel} disabled={this.state.login ? 'disable' : ''} onChange={this.props.changeCourriel} type="text" />
 							{btnLogin}
 							</li>
 						</ul>

@@ -15,6 +15,7 @@ export default class DetailBiere extends React.Component {
             commentaires: [],
             newCommentValue: [],
             newCommentId: [],
+            reload:false,
 
         };
 
@@ -82,12 +83,13 @@ export default class DetailBiere extends React.Component {
         await this.setState({ newCommentValue: event.target.value });
     }
 
-    handleSubmit(event) {
+    async handleSubmit(event) {
         event.preventDefault();
-        this.putUnCommentaire();
+        await this.putUnCommentaire();
+        this.getCommentaires();
     }
 
-    putUnCommentaire() {
+    async putUnCommentaire() {
         const { id } = this.props?.param?.match?.params;
         const entete = new Headers();
         entete.append("Content-Type", "application/json");
@@ -100,9 +102,12 @@ export default class DetailBiere extends React.Component {
                 "commentaire": this.state.newCommentValue,
             })
         };
-        fetch("http://127.0.0.1:8000/webservice/php/biere/" + id + "/commentaire", requestOptions)
+        await fetch("http://127.0.0.1:8000/webservice/php/biere/" + id + "/commentaire", requestOptions)
             .then(response => response.json())
-            .then(data => this.setState({ newCommentId: data.id }));
+            .then(data => this.setState({ newCommentId: data.id }))
+        
+        this.getCommentaires();
+
     }
 
     //Nouvelle Note
@@ -110,9 +115,10 @@ export default class DetailBiere extends React.Component {
     async setNewNoteValue(event) {
         await this.setState({ newNote: event.target.value });
         this.putNote();
+
     }
 
-    putNote() {
+    async putNote() {
         const { id } = this.props?.param?.match?.params;
         const entete = new Headers();
         entete.append("Content-Type", "application/json");
@@ -125,22 +131,27 @@ export default class DetailBiere extends React.Component {
                 "note": this.state.newNote,
             })
         };
-        fetch("http://127.0.0.1:8000/webservice/php/biere/" + id + "/note", requestOptions)
+         await fetch("http://127.0.0.1:8000/webservice/php/biere/" + id + "/note", requestOptions)
             .then(response => response.json())
             .then(data => this.setState({ newNoteId: data.id }));
+
+            this.getNote();
     }
 
 
 
     render() {
+
+        
+
         const detailBiere = this.state.detailBiere;
         const noteBiere = this.state.note
         const commentaires = this.state.commentaires
             .map((commentaire, index) => {
                 return (
                     <article className="unCommentaire" key={index}>
-                        <p className='commentaire'>{commentaire.commentaire}</p>
-                        <p className='courriel'>Par : {commentaire.courriel}</p>
+                        <p className='description'>{commentaire.commentaire}</p>
+                        <p className='ref'>Par : {commentaire.courriel}</p>
                     </article>
 
                 );
@@ -152,7 +163,7 @@ export default class DetailBiere extends React.Component {
         let isLoginShowFormCommentaire = "";
         let isNotLoginMessage = "";
         if (this.props.login) {
-            isLoginShowFormNote = <div onChange={this.setNewNoteValue} className='radioNote_wrapper'>
+            isLoginShowFormNote = <div  className='radioNote_wrapper'>
                 <p className='description'>Noter cette bière :</p>
                 <div className="radioNote">
                     <input type="radio" id="note-0" name="newNote" value="0"></input>
@@ -189,27 +200,32 @@ export default class DetailBiere extends React.Component {
                 </div>;
         }
         else {
-            isNotLoginMessage = <p>Se connecter pour entrer une note ou un commentaire</p>;
+            isNotLoginMessage = <p className="is_not_log">Veuillez vous connecter pour entrer une note ou un commentaire</p>;
         }
 
 
         return (
             <div className='biere_wrapper'>
                 <h1>DetailBiere</h1>
-                <article className='uneBiere init'>
+                <article className='uneBiereSeule init'>
+                    
+                    <section className='detail'>
                     <div className='image'>
                         <img src={"../imgBieres/" + detailBiere.id_biere + ".jpg"} />
                     </div>
-                    <section className='texte'>
+                    <div className="detail_wrapper">
                         <h2>{detailBiere.nom}</h2>
                         <p className='ref'>Ref : {detailBiere.id_biere}</p>
                         <p className='fabricant'>Fabricant : {detailBiere.brasserie}</p>
                         <p className='description'>Description : {detailBiere.description}</p>
                         {isNotLoginMessage}
+                    </div>
+                        
 
                     </section>
-                    <section>
-                        <h4 className='note'>Note actuelle moyenne : {noteBiere.note} ({noteBiere.nombre})</h4>
+                    <section className='note' onChange={this.setNewNoteValue}>
+                        
+                        <h4>Note actuelle moyenne : {noteBiere.note} ({noteBiere.nombre})</h4>
                         {isLoginShowFormNote}
 
                     </section>
